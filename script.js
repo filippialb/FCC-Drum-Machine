@@ -1,141 +1,68 @@
-// Get the button element by its ID
-const myButtonQ = document.getElementById('btn-q');
-const myButtonW = document.getElementById('btn-w');
-const myButtonE = document.getElementById('btn-e');
-const myButtonA = document.getElementById('btn-a');
-const myButtonS = document.getElementById('btn-s');
-const myButtonD = document.getElementById('btn-d');
-const myButtonZ = document.getElementById('btn-z');
-const myButtonX = document.getElementById('btn-x');
-const myButtonC = document.getElementById('btn-c');
-const audioQ = document.getElementById('audioQ');
-const audioW = document.getElementById('audioW');
+const buttons = document.querySelectorAll('.drum-pad');
+const audioElements = {
+    '81': new Audio('/songs/fbi-open-up-explosion.mp3'),
+    '87': new Audio('/songs/acaba-pelo-amor-deus-acabaaa.mp3'),
+    '69': new Audio('/songs/feiao.mp3'),
+    '65': new Audio('/songs/galaxy-meme.mp3'),
+    '83': new Audio('/songs/larissa-manoel-pedindo-pix.mp3'),
+    '68': new Audio('/songs/o-james-eu-quero-uma-salada-de-fruta.mp3'),
+    '90': new Audio('/songs/que-nojo.mp3'),
+    '88': new Audio('/songs/se-eu-largar-o-freio-oficial.mp3'),
+    '67': new Audio('/songs/why-are-you-gay_W5G134P.mp3'),
 
-function playAudioQ(){
-    audioQ.play();
+
+    // Add similar entries for other keys
 };
-function playAudioW(){
-    audioW.play();
+let currentAudio = null;
+const outputDiv = document.getElementById('songNameOutput');
+
+function playAudio(key) {
+    if(currentAudio){
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+    }
+    
+    const audio = audioElements[key];
+    if (audio) {
+        audio.play();
+        currentAudio = audio;
+    }
 }
 
-
-
-
-// Function to set triggered state
-function setTriggeredStateQ() {
-    myButtonQ.classList.add('triggered');
-}
-function setTriggeredStateW() {
-    myButtonW.classList.add('triggered');
-}
-function setTriggeredStateE() {
-    myButtonE.classList.add('triggered');
-}
-function setTriggeredStateA() {
-    myButtonA.classList.add('triggered');
-}
-function setTriggeredStateS() {
-    myButtonS.classList.add('triggered');
-}
-function setTriggeredStateD() {
-    myButtonD.classList.add('triggered');
-}
-function setTriggeredStateZ() {
-    myButtonZ.classList.add('triggered');
-}
-function setTriggeredStateX() {
-    myButtonX.classList.add('triggered');
-}
-function setTriggeredStateC() {
-    myButtonC.classList.add('triggered');
+function displayText(text) {
+    outputDiv.textContent = text;
 }
 
-// Function to reset triggered state
-function resetTriggeredState() {
-    myButtonQ.classList.remove('triggered');
-    myButtonW.classList.remove('triggered');
-    myButtonE.classList.remove('triggered');
-    myButtonA.classList.remove('triggered');
-    myButtonS.classList.remove('triggered');
-    myButtonD.classList.remove('triggered');
-    myButtonZ.classList.remove('triggered');
-    myButtonX.classList.remove('triggered');
-    myButtonC.classList.remove('triggered');
+function handleButtonClick(event) {
+    const key = event.target.dataset.key;
+    if (key) {
+        console.log(`Hello${String.fromCharCode(key)}`);
+        playAudio(key);
+        const songFileName = audioElements[key].src.split('/').pop(); // Extracting the file name from the audio element's URL
+        displayText(songFileName);
+    }
 }
 
-// Event listener for the "q" key press
-document.addEventListener('keydown', function(event) {
-    // Check if the pressed key is 'q' (key code 81)
-    if (event.keyCode === 81) {
-        setTriggeredStateQ(); // Set triggered state when the key is pressed
-        myButtonQ.click();
-    } else if(event.keyCode === 87){
-        setTriggeredStateW(); // Set triggered state when the key is pressed
-        myButtonW.click();
-    } else if (event.keyCode === 69){
-        setTriggeredStateE(); // Set triggered state when the key is pressed
-        myButtonE.click();
-    } else if (event.keyCode === 65){
-        setTriggeredStateA(); // Set triggered state when the key is pressed
-        myButtonA.click();
-    } else if (event.keyCode === 83){
-        setTriggeredStateS(); // Set triggered state when the key is pressed
-        myButtonS.click();
-    } else if (event.keyCode === 68){
-        setTriggeredStateD(); // Set triggered state when the key is pressed
-        myButtonD.click();
-    } else if (event.keyCode === 90){
-        setTriggeredStateZ(); // Set triggered state when the key is pressed
-        myButtonZ.click();
-    } else if (event.keyCode === 88){
-        setTriggeredStateX(); // Set triggered state when the key is pressed
-        myButtonX.click();
-    } else if (event.keyCode === 67){
-        setTriggeredStateC(); // Set triggered state when the key is pressed
-        myButtonC.click();
-}}
-)
+function resetButtons() {
+    buttons.forEach(button => button.classList.remove('triggered'));
+}
 
+function handleKeyPress(event) {
+    const key = event.keyCode.toString();
+    const button = document.querySelector(`[data-key="${key}"]`);
+    if (button) {
+        button.classList.add('triggered');
+        button.click();
+    }
+}
 
+function handleKeyRelease(event) {
+    const key = event.keyCode.toString();
+    if (audioElements[key]) {
+        resetButtons();
+    }
+}
 
-
-// Event listener for the "q" key release
-document.addEventListener('keyup', function(event) {
-    // Check if the released key is 'q' (key code 81)
-    if (event.keyCode === 81 || event.keyCode === 87 || event.keyCode === 69 || event.keyCode === 65 || event.keyCode === 83 || 
-        event.keyCode === 68  || event.keyCode === 90 || event.keyCode === 88 || event.keyCode === 67) {
-        resetTriggeredState(); // Reset triggered state when the key is released
-    } 
-});
-
-// Event listener for the button click
-myButtonQ.addEventListener('click', function() {
-    console.log('HelloQ');
-    playAudioQ();
-
-});
-myButtonW.addEventListener('click', function() {
-    console.log('HelloW');
-    playAudioW();
-});
-myButtonE.addEventListener('click', function() {
-    console.log('HelloE');
-});
-myButtonA.addEventListener('click', function() {
-    console.log('HelloA');
-});
-myButtonS.addEventListener('click', function() {
-    console.log('HelloS');
-});
-myButtonD.addEventListener('click', function() {
-    console.log('HelloD');
-});
-myButtonZ.addEventListener('click', function() {
-    console.log('HelloZ');
-});
-myButtonX.addEventListener('click', function() {
-    console.log('HelloX');
-});
-myButtonC.addEventListener('click', function() {
-    console.log('HelloC');
-});
+buttons.forEach(button => button.addEventListener('click', handleButtonClick));
+document.addEventListener('keydown', handleKeyPress);
+document.addEventListener('keyup', handleKeyRelease);

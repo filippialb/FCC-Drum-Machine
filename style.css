@@ -33,7 +33,7 @@ justify-content: flex-start;
 padding-left: 20px;
 }
 
-.sound-btn{
+.drum-pad{
     width: 50px;
     height: 50px;
     border: 1px solid black;
@@ -42,11 +42,15 @@ padding-left: 20px;
     cursor: pointer;
 }
 
-.sound-btn:hover {
+.drum-pad:hover {
     background-color: #2980b9;
 }
 
 .triggered {
     background-color: #ff5733; /* Change this to the desired color */
     /* Add any other styles you want for the triggered state */
+}
+
+#songNameOutput{
+    padding-left: 100px;
 }

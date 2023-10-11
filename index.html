@@ -7,28 +7,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <section class="container">
-        <div class="box">
-            <div class="buttons">
-                <button class="sound-btn" id="btn-q">Q</button>
-                <audio id="audioQ"> 
-                    <source src="/songs/fbi-open-up-explosion.mp3" type="audio/mpeg">
-                </audio>
-                <button class="sound-btn" id="btn-w">W</button>
-                <audio id="audioW"> 
-                    <source src="/songs/why-are-you-gay_W5G134P.mp3" type="audio/mpeg">
-                </audio>
-                <button class="sound-btn" id="btn-e">E</button>
-                <button class="sound-btn" id="btn-a">A</button>
-                <button class="sound-btn" id="btn-s">S</button>
-                <button class="sound-btn" id="btn-d">D</button>
-                <button class="sound-btn" id="btn-z">Z</button>
-                <button class="sound-btn" id="btn-x">X</button>
-                <button class="sound-btn" id="btn-c">C</button>
+    <div class="drum-machine" id="drum-machine">
+        <section class="container" id="display">
+            <div class="box">
+                <div class="buttons">
+                    <button class="drum-pad" id="Q" data-key="81"><audio src="/songs/fbi-open-up-explosion.mp3" class="clip"></audio>Q</button>
+                    <button class="drum-pad" id="W" data-key="87"><audio src="/songs/acaba-pelo-amor-deus-acabaaa.mp3" class="clip"></audio>W</button>
+                    <button class="drum-pad" id="E" data-key="69"><audio src="/songs/feiao.mp3" class="clip"></audio>E</button>
+                    <button class="drum-pad" id="A" data-key="65"><audio src="/songs/galaxy-meme.mp3" class="clip"></audio>A</button>
+                    <button class="drum-pad" id="S" data-key="83"><audio src="/songs/larissa-manoel-pedindo-pix.mp3" class="clip"></audio>S</button>
+                    <button class="drum-pad" id="D" data-key="68"><audio src="/songs/o-james-eu-quero-uma-salada-de-fruta.mp3" class="clip"></audio>D</button>
+                    <button class="drum-pad" id="Z" data-key="90"><audio src="/songs/que-nojo.mp3" class="clip"></audio>Z</button>
+                    <button class="drum-pad" id="X" data-key="88"><audio src="/songs/se-eu-largar-o-freio-oficial.mp3" class="clip"></audio>X</button>
+                    <button class="drum-pad" id="C" data-key="67"><audio src="/songs/why-are-you-gay_W5G134P.mp3" class="clip"></audio>C</button>
+                </div>
+                <div id="songNameOutput">
+                    
+                </div>
             </div>
-        </div>
 
-    </section>
+        </section>
+    </div>
     <script src="script.js"></script>
+
 </body>
 </html>
